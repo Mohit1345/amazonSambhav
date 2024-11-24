@@ -48,7 +48,7 @@ def process_data(product_name, country):
         "dgft":"amazon-sambhav/dgft/extracted_data.json",     
         "macmap":"amazon-sambhav/macmap/products.json",
         "drawback":"amazon-sambhav/drawback/drawback.json",
-        "rodtep":""
+        "rodtep":"amazon-sambhav/rodtep/rodtep.json"
     }
 
 
