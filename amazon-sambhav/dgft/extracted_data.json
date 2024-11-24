@@ -1,0 +1,390 @@
+[
+    {
+        "id": "01",
+        "name": "Live Animals."
+    },
+    {
+        "id": "02",
+        "name": "Meat And Edible Meat Offal."
+    },
+    {
+        "id": "03",
+        "name": "Fish And Crustaceans, Molluscs And Other Aquatic Invertebrates."
+    },
+    {
+        "id": "04",
+        "name": "Dairy Produce; Birds Eggs; Natural Honey; Edible Products Of Animal Origin, Not Elsewhere Specified Or Included."
+    },
+    {
+        "id": "05",
+        "name": "Products Of Animal Origin, Not Elsewhere Specified Or Included."
+    },
+    {
+        "id": "06",
+        "name": "Live Trees And Other Plants; Bulbs, Roots And The Like; Cut Flowers And Ornamental Foliage."
+    },
+    {
+        "id": "07",
+        "name": "Edible Vegetables And Certain Roots And Tubers."
+    },
+    {
+        "id": "08",
+        "name": "Edible Fruit And Nuts; Peel Of Citrus Fruit Or Melons."
+    },
+    {
+        "id": "09",
+        "name": "Coffee, Tea, Mat\u00e9 And Spices."
+    },
+    {
+        "id": "10",
+        "name": "Cereals."
+    },
+    {
+        "id": "11",
+        "name": "Products Of The Milling Industry; Malt; Starches; Inulin; Wheat Gluten."
+    },
+    {
+        "id": "12",
+        "name": "Oil Seeds And Oleaginous Fruits; Miscellaneous Grains, Seeds And Fruit; Industrial Or Medicinal Plants; Straw And Fodder."
+    },
+    {
+        "id": "13",
+        "name": "Lac; Gums, Resins And Other Vegetable Saps And Extracts."
+    },
+    {
+        "id": "14",
+        "name": "Vegetable Plaiting Materials; Vegetable Products Not Elsewhere Specified Or Included."
+    },
+    {
+        "id": "15",
+        "name": "Animal Or Vegetable Fats And Oils And Their Cleavage Products; Prepared Edible Fats; Animal Or Vegetable Waxes."
+    },
+    {
+        "id": "16",
+        "name": "Preparations of Meat, of Fish, of Crustaceans, Molluscsor other Aquatic Invertebrates or of Insects"
+    },
+    {
+        "id": "17",
+        "name": "Sugars And Sugar Confectionery."
+    },
+    {
+        "id": "18",
+        "name": "Cocoa And Cocoa Preparations."
+    },
+    {
+        "id": "19",
+        "name": "Preparations Of Cereals, Flour, Starch Or Milk; Pastrycooks Products."
+    },
+    {
+        "id": "20",
+        "name": "Preparations Of Vegetables, Fruit, Nuts Or Other Parts Of Plants."
+    },
+    {
+        "id": "21",
+        "name": "Miscellaneous Edible Preparations."
+    },
+    {
+        "id": "22",
+        "name": "Beverages, Spirits And Vinegar."
+    },
+    {
+        "id": "23",
+        "name": "Residues And Waste From The Food Industries; Prepared Animal Fodder."
+    },
+    {
+        "id": "24",
+        "name": "Tobacco And Manufactured Tobacco Substitutes."
+    },
+    {
+        "id": "25",
+        "name": "Salt; Sulphur; Earths And Stone; Plastering Materials, Lime And Cement."
+    },
+    {
+        "id": "26",
+        "name": "Ores, Slag And Ash."
+    },
+    {
+        "id": "27",
+        "name": "Mineral Fuels, Mineral Oils And Products Of Their Distillation; Bituminous Substances; Mineral Waxes."
+    },
+    {
+        "id": "28",
+        "name": "Inorganic Chemicals; Organic Or Inorganic Compounds Of Precious Metals, Of Rare-Earth Metals, Of Radioactive Elements Or Of Isotopes."
+    },
+    {
+        "id": "29",
+        "name": "Organic Chemicals."
+    },
+    {
+        "id": "30",
+        "name": "Pharmaceutical Products."
+    },
+    {
+        "id": "31",
+        "name": "Fertilisers."
+    },
+    {
+        "id": "32",
+        "name": "Tanning Or Dyeing Extracts; Tannins And Their Derivatives; Dyes, Pigments And Other Colouring Matter; Paints And Varnishes; Putty And Other Mastics; Inks."
+    },
+    {
+        "id": "33",
+        "name": "Essential Oils And Resinoids; Perfumery, Cosmetic Or Toilet Preparations."
+    },
+    {
+        "id": "34",
+        "name": "Soap, Organic Surface-Active Agents, Washing Preparations, Lubricating Preparations, Artificial Waxes, Prepared Waxes, Polishing Or Scouring Preparations, Candles And Similar Articles, Modelling Pastes, Dental Waxes And Dental Preparations With A Basis Of Plaster."
+    },
+    {
+        "id": "35",
+        "name": "Albuminoidal Substances; Modified Starches; Glues; Enzymes."
+    },
+    {
+        "id": "36",
+        "name": "Explosives; Pyrotechnic Products; Matches; Pyrophoric Alloys; Certain Combustible Preparations."
+    },
+    {
+        "id": "37",
+        "name": "Photographic Or Cinematographic Goods."
+    },
+    {
+        "id": "38",
+        "name": "Miscellaneous Chemical Products."
+    },
+    {
+        "id": "39",
+        "name": "Plastics And Articles Thereof."
+    },
+    {
+        "id": "40",
+        "name": "Rubber And Articles Thereof."
+    },
+    {
+        "id": "41",
+        "name": "Raw Hides And Skins (Other Than Furskins) And Leather."
+    },
+    {
+        "id": "42",
+        "name": "Articles Of Leather; Saddlery And Harness; Travel Goods, Handbags And Similar Containers; Articles Of Animal Gut (Other Than Silk-Worm Gut)."
+    },
+    {
+        "id": "43",
+        "name": "Furskins And Artificial Fur; Manufactures Thereof."
+    },
+    {
+        "id": "44",
+        "name": "Wood And Articles Of Wood; Wood Charcoal."
+    },
+    {
+        "id": "45",
+        "name": "Cork And Articles Of Cork."
+    },
+    {
+        "id": "46",
+        "name": "Manufactures Of Straw, Of Esparto Or Of Other Plaiting Materials; Basketware And Wickerwork."
+    },
+    {
+        "id": "47",
+        "name": "Pulp Of Wood Or Of Other Fibrous Cellulosic Material; Recovered (Waste And Scrap) Paper Or Paperboard."
+    },
+    {
+        "id": "48",
+        "name": "Paper And Paperboard; Articles Of Paper Pulp, Of Paper Or Of Paperboard."
+    },
+    {
+        "id": "49",
+        "name": "Printed Books, Newspapers, Pictures And Other Products Of The Printing Industry; Manuscripts, Typescripts And Plans."
+    },
+    {
+        "id": "50",
+        "name": "Silk."
+    },
+    {
+        "id": "51",
+        "name": "Wool, Fine Or Coarse Animal Hair; Horsehair Yarn And Woven Fabric."
+    },
+    {
+        "id": "52",
+        "name": "Cotton."
+    },
+    {
+        "id": "53",
+        "name": "Other Vegetable Textile Fibres; Paper Yarn And Woven Fabrics Of Paper Yarn."
+    },
+    {
+        "id": "54",
+        "name": "Man-Made Filaments."
+    },
+    {
+        "id": "55",
+        "name": "Man-Made Staple Fibres."
+    },
+    {
+        "id": "56",
+        "name": "Wadding, Felt And Nonwovens; Special Yarns; Twine, Cordage, Ropes And Cables And Articles Thereof."
+    },
+    {
+        "id": "57",
+        "name": "Carpets And Other Textile Floor Coverings."
+    },
+    {
+        "id": "58",
+        "name": "Special Woven Fabrics; Tufted Textile Fabrics; Lace; Tapestries; Trimmings; Embroidery."
+    },
+    {
+        "id": "59",
+        "name": "Impregnated, Coated, Covered Or Laminated Textile Fabrics; Textile Articles Of A Kind Suitable For Industrial Use."
+    },
+    {
+        "id": "60",
+        "name": "Knitted Or Crocheted Fabrics."
+    },
+    {
+        "id": "61",
+        "name": "Articles Of Apparel And Clothing Accessories, Knitted Or Crocheted."
+    },
+    {
+        "id": "62",
+        "name": "Articles Of Apparel And Clothing Accessories, Not Knitted Or Crocheted."
+    },
+    {
+        "id": "63",
+        "name": "Other Made Up Textile Articles; Sets; Worn Clothing And Worn Textile Articles; Rags."
+    },
+    {
+        "id": "64",
+        "name": "Footwear, Gaiters And The Like; Parts Of Such Articles."
+    },
+    {
+        "id": "65",
+        "name": "Headgear And Parts Thereof."
+    },
+    {
+        "id": "66",
+        "name": "Umbrellas, Sun Umbrellas, Walking-Sticks, Seat-Sticks, Whips, Riding-Crops And Parts Thereof."
+    },
+    {
+        "id": "67",
+        "name": "Prepared Feathers And Down And Articles Made Of Feathers Or Of Down; Artificial Flowers; Articles Of Human Hair."
+    },
+    {
+        "id": "68",
+        "name": "Articles Of Stone, Plaster, Cement, Asbestos, Mica Or Similar Materials."
+    },
+    {
+        "id": "69",
+        "name": "Ceramic Products."
+    },
+    {
+        "id": "70",
+        "name": "Glass And Glassware."
+    },
+    {
+        "id": "71",
+        "name": "Natural Or Cultured Pearls, Precious Or Semi-Precious Stones, Precious Metals, Metals Clad With Precious Metal And Articles Thereof; Imitation Jewellery; Coin."
+    },
+    {
+        "id": "72",
+        "name": "Iron And Steel."
+    },
+    {
+        "id": "73",
+        "name": "Articles Of Iron Or Steel."
+    },
+    {
+        "id": "74",
+        "name": "Copper And Articles Thereof."
+    },
+    {
+        "id": "75",
+        "name": "Nickel And Articles Thereof."
+    },
+    {
+        "id": "76",
+        "name": "Aluminium And Articles Thereof."
+    },
+    {
+        "id": "78",
+        "name": "Lead And Articles Thereof."
+    },
+    {
+        "id": "79",
+        "name": "Zinc And Articles Thereof."
+    },
+    {
+        "id": "80",
+        "name": "Tin And Articles Thereof."
+    },
+    {
+        "id": "81",
+        "name": "Other Base Metals; Cermets; Articles Thereof."
+    },
+    {
+        "id": "82",
+        "name": "Tools, Implements, Cutlery, Spoons And Forks, Of Base Metal; Parts Thereof Of Base Metal."
+    },
+    {
+        "id": "83",
+        "name": "Miscellaneous Articles Of Base Metal."
+    },
+    {
+        "id": "84",
+        "name": "Nuclear Reactors, Boilers, Machinery And Mechanical Appliances; Parts Thereof."
+    },
+    {
+        "id": "85",
+        "name": "Electrical Machinery And Equipment And Parts Thereof; Sound Recorders And Reproducers, Television Image And Sound Recorders And Reproducers, And Parts And Accessories Of Such Articles."
+    },
+    {
+        "id": "86",
+        "name": "Railway Or Tramway Locomotives, Rolling-Stock And Parts Thereof; Railway Or Tramway Track Fixtures And Fittings And Parts Thereof; Mechanical (Including Electro-Mechanical) Traffic Signalling Equipment Of All Kinds."
+    },
+    {
+        "id": "87",
+        "name": "Vehicles Other Than Railway Or Tramway Rolling-Stock, And Parts And Accessories Thereof."
+    },
+    {
+        "id": "88",
+        "name": "Aircraft, Spacecraft, And Parts Thereof."
+    },
+    {
+        "id": "89",
+        "name": "Ships, Boats And Floating Structures."
+    },
+    {
+        "id": "90",
+        "name": "Optical, Photographic, Cinematographic, Measuring, Checking, Precision, Medical Or Surgical Instruments And Apparatus; Parts And Accessories Thereof."
+    },
+    {
+        "id": "91",
+        "name": "Clocks And Watches And Parts Thereof."
+    },
+    {
+        "id": "92",
+        "name": "Musical Instruments; Parts And Accessories Of Such Articles."
+    },
+    {
+        "id": "93",
+        "name": "Arms And Ammunition; Parts And Accessories Thereof."
+    },
+    {
+        "id": "94",
+        "name": "Furniture; Bedding, Mattresses, Mattress Supports, Cushions And Similar Stuffed Furnishings; Lamps And Lighting Fittings, Not Elsewhere Specified Or Included; Illuminated Signs, Illuminated Name-Plates And The Like; Prefabricated Buildings."
+    },
+    {
+        "id": "95",
+        "name": "Toys, Games And Sports Requisites; Parts And Accessories Thereof."
+    },
+    {
+        "id": "96",
+        "name": "Miscellaneous Manufactured Articles."
+    },
+    {
+        "id": "97",
+        "name": "Works Of Art, Collectors Pieces And Antiques"
+    },
+    {
+        "id": "98",
+        "name": "Project Imports; Laboratory Chemicals; Passengers Baggage, Personal Implementations By Air Or Post; Ship Stores"
+    }
+]

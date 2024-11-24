@@ -1,0 +1,23 @@
+{
+    "ThExportingCountry": null,
+    "ThNtlc": null,
+    "ThNTLCDescription": null,
+    "ThRemedyType": null,
+    "ThRemedyStatus": null,
+    "ThDuty": null,
+    "ThStartDate": null,
+    "ThEndDate": null,
+    "ThDocument": null,
+    "ThNote": null,
+    "ThExportingFirm": null,
+    "TradeRemediesYear": null,
+    "CollectionYear": null,
+    "ReferenceData": null,
+    "isAllPartner": false,
+    "LblHistory": null,
+    "LblLearnAboutMeasure": null,
+    "LblTradeRemedies": null,
+    "LblClose": null,
+    "TranspositionComment": null,
+    "TradeRemedyData": null
+}
