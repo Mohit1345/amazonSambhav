@@ -7,8 +7,11 @@
 
 from flask import Flask, request, jsonify
 from back import process_data
+from flask_cors import CORS
+ 
 
 app = Flask(__name__)
+CORS(app)
 
 # Sample storage for products and related data (in-memory for simplicity)
 products = {}
