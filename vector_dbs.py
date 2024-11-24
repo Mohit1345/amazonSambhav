@@ -25,9 +25,12 @@ from langchain_experimental.text_splitter import SemanticChunker
 from langchain_text_splitters import RecursiveJsonSplitter
 import pandas as pd
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 if "GOOGLE_API_KEY" not in os.environ:
-    os.environ["GOOGLE_API_KEY"] = "AIzaSyDx7qfTs0xsAAfycT_sTBiAp2wwbpj5_DE"
+    os.environ["GOOGLE_API_KEY"] = os.environ.get("GEMINI_API_KEY")
     
 
 def chunking(pdf_data,type=""):

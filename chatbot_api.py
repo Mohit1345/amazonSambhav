@@ -1,6 +1,10 @@
 import google.generativeai as genai
+from dotenv import load_dotenv
+import os
 
-genai.configure(api_key="API_KEY")
+load_dotenv()
+
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY2"))
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_chroma import Chroma
 import re

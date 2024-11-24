@@ -7,27 +7,11 @@
 
 from flask import Flask, request, jsonify
 from back import process_data
-<<<<<<< HEAD
 from flask_cors import CORS
- 
-=======
-import google.generativeai as genai
-genai.configure(api_key="API_KEY")
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain_chroma import Chroma
-import re
-
-from reportlab.lib.pagesizes import letter
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem
-
-from document_guide_generation import create_guide_document, upload_on_cloudinary
-
->>>>>>> ca44b6b32f2f0f90695ab61e2526d3a7fef73e0a
 
 app = Flask(__name__)
-CORS(app)
-
+CORS(app, resources={r"/*": {"origins": "*"}}) 
+# Sample storage for products and related data (in-memory for simplicity)
 products = {}
 
 model = genai.GenerativeModel(
