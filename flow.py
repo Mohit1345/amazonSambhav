@@ -7,6 +7,18 @@
 
 from flask import Flask, request, jsonify
 from back import process_data
+import google.generativeai as genai
+genai.configure(api_key="API_KEY")
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_chroma import Chroma
+import re
+
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem
+
+from document_guide_generation import create_guide_document, upload_on_cloudinary
+
 from flask_cors import CORS
 
 app = Flask(__name__)
