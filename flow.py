@@ -7,11 +7,89 @@
 
 from flask import Flask, request, jsonify
 from back import process_data
+import google.generativeai as genai
+genai.configure(api_key="API_KEY")
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_chroma import Chroma
+import re
+
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem
+
+from document_guide_generation import create_guide_document, upload_on_cloudinary
+
 
 app = Flask(__name__)
 
-# Sample storage for products and related data (in-memory for simplicity)
 products = {}
+
+model = genai.GenerativeModel(
+    model_name="gemini-1.5-flash",
+    system_instruction=(
+        "You are an expert in international trade compliance, import/export requirements, and incentive schemes. "
+        "Your task is to guide the user in importing or exporting products to specific countries. "
+        "Using the provided context from a vector database, respond with clear, accurate, and actionable advice tailored to the user's query.\n\n"
+        "Guidelines:\n"
+        "- Focus your response on the compliance requirements, regulations, and schemes relevant to the query and context provided.\n"
+        "- Ensure your guidance is concise, professional, and easy to understand.\n"
+        "- If the context lacks sufficient information, state what is missing and suggest additional details the user could provide."
+    )
+)
+
+def get_context(prompt, vector_db_name="universal"):
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+    print("connecting vector db")
+    try:
+        vectorstore = Chroma(persist_directory=vector_db_name, embedding_function=embeddings)
+    except FileNotFoundError:
+        raise ValueError(f"Vector database '{vector_db_name}' does not exist.")
+    print("vector db connected")
+    results = vectorstore.similarity_search(prompt, k=1)  # Retrieve top 5 matches
+    retrieved_data = [{"content": doc.page_content, "metadata": doc.metadata} for doc in results]
+
+    context  = ""
+    for data in retrieved_data:
+        context += data['content'] + "\n"
+
+    if retrieved_data==[]:
+        return "No Information Available"
+    
+    return retrieved_data
+
+
+chat = model.start_chat(history=[])
+
+@app.route('/chat', methods=['POST'])
+def chat_endpoint():
+    data = request.json
+    query = data.get("message", "")
+    history = data.get("history", [])
+
+    if not query:
+        return jsonify({"error": "Message is required"}), 400
+
+    context = get_context(query)
+
+    # Prepare the prompt with the existing history
+    prompt = "\n".join(history) + f"\nUser: {query}\n Context:{context} \nAnswer:"
+    
+    # Send message to the chatbot
+    response = chat.send_message(prompt, stream=True)
+    
+    # Collect the response text from the stream
+    response_text = ""
+    for chunk in response:
+        if chunk.text:
+            response_text += chunk.text
+
+    # Update the history with the new query and response
+    history.append(f"User: {query}")
+    history.append(f"Bot: {response_text}")
+
+    return jsonify({"response": response_text, "history": str(history)})
+
+
 
 @app.route('/submit-product', methods=['POST'])
 def submit_product():
@@ -21,7 +99,7 @@ def submit_product():
     try:
         data = request.get_json()
 
-        # Validate required fields
+
         product_name = data.get('product_name')
         import_country = data.get('import_country')
 
@@ -31,8 +109,8 @@ def submit_product():
                 "message": "Both 'product_name' and 'import_country' are required."
             }), 400
 
-        # Save the product information
-        product_id = len(products) + 1  # Simple ID assignment
+
+        product_id = len(products) + 1 
         products[product_id] = {
             "product_name": product_name,
             "import_country": import_country
@@ -53,6 +131,32 @@ def submit_product():
             "message": f"An error occurred: {str(e)}"
         }), 500
 
+
+
+@app.route('/generate-guide', methods=['POST'])
+def generate_guide():
+    data = request.json
+    
+    # Extract the product name from the request
+    product_name = data.get("product_name")
+    
+    if not product_name:
+        return jsonify({"error": "Product name is required"}), 400
+    
+    # Create the guide document
+    try:
+        file_name = create_guide_document(product_name)
+        
+        # Upload the file to Cloudinary
+        file_url = upload_on_cloudinary(file_name)
+        
+        # Optionally, you can delete the local file after uploading
+        if os.path.exists(file_name):
+            os.remove(file_name)
+        
+        return jsonify({"url": file_url})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == '__main__':

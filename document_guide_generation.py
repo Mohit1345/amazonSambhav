@@ -7,7 +7,29 @@ genai.configure(api_key="AIzaSyC6SoO4TZWYmWvHa66f04osFHrEjsavjuY")
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_chroma import Chroma
 import re
+import json
+import cloudinary
+import cloudinary.uploader
 
+def upload_pdf_to_cloudinary(file_path):
+    # Configure Cloudinary
+    cloudinary.config(
+        cloud_name="dde4uttp5",  # Replace with your Cloudinary cloud name
+        api_key="176797228913411",        # Replace with your Cloudinary API key
+        api_secret="w4M7UhrIOUmixDMpt_2LKMfX_ys",  # Replace with your Cloudinary API secret
+    )
+
+    try:
+        response = cloudinary.uploader.upload(
+            file_path,
+            resource_type="raw",  # Specify raw to upload non-image files
+            folder="pdf_uploads"  # Optional folder to organize files
+        )
+        # Return the secure URL of the uploaded file
+        return response.get("secure_url", "Upload failed. No URL returned.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
 
 def get_context(prompt, vector_db_name="universal"):
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
@@ -206,8 +228,6 @@ Return the output in json format enclosed in ```json ```
     # print(response.text)
     return extract_json(response.text)
 
-import json
-
 def heading_information_generation(product_name, context_information_dict):
     model = genai.GenerativeModel(
         model_name="gemini-1.5-flash",
@@ -244,8 +264,8 @@ Return the output in json format enclosed in ```json ```
     return json_info
 
 
-
-def create_document(product_name, context_information_dict):
+def create_guide_document(product_name):
+    context_information_dict = get_export_compliance_context(product_name)
     compliance_category_mapping = {
     'Amazon Product Compliance': 'amazon_products_info',
     'Import Compliance': 'macmap_information',
@@ -274,10 +294,8 @@ def create_document(product_name, context_information_dict):
     create_pdf(file_name, head_json, all_sections)
     return file_name
 
-product_name = ""
-context_dict = get_export_compliance_context(product_name)
-create_document("Mens T-shirts", context_dict)
 
 
 # print(type(heading_information_generation("Mens T shirts", {})))
 
+# print(upload_pdf_to_cloudinary("C:\\Users\\hp\\Desktop\\Sambhav Hackathon\\Apparel- Adults_Men or Women Accessories (1).pdf"))

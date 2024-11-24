@@ -1,10 +1,11 @@
 import google.generativeai as genai
 
-genai.configure(api_key="AIzaSyC6SoO4TZWYmWvHa66f04osFHrEjsavjuY")
+genai.configure(api_key="API_KEY")
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_chroma import Chroma
 import re
 from flask import Flask, request, jsonify
+import json
 
 app = Flask(__name__)
 
@@ -48,30 +49,26 @@ chat = model.start_chat(history=[])
 def chat_endpoint():
     data = request.json
     query = data.get("message", "")
-    history = data.get("history", [])
+    history = json.loads(data.get("history", []))
 
     if not query:
         return jsonify({"error": "Message is required"}), 400
 
     context = get_context(query)
 
-    # Prepare the prompt with the existing history
     prompt = "\n".join(history) + f"\nUser: {query}\n Context:{context} \nAnswer:"
     
-    # Send message to the chatbot
     response = chat.send_message(prompt, stream=True)
     
-    # Collect the response text from the stream
     response_text = ""
     for chunk in response:
         if chunk.text:
             response_text += chunk.text
 
-    # Update the history with the new query and response
     history.append(f"User: {query}")
     history.append(f"Bot: {response_text}")
 
-    return jsonify({"response": response_text, "history": history})
+    return jsonify({"response": response_text, "history": str(history)})
 
 if __name__ == '__main__':
     app.run(debug=True)
