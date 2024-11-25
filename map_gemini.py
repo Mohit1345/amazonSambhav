@@ -77,21 +77,23 @@ def match_gemini(data_json,prompt):
 def semantic_search(api_jsons, query2,type):
     final_sentences = []
 
-    if "one" in type:
+    if "macmap" in type:
         for obj in api_jsons:
             final_sentences.append(obj['Name'])
     elif "dgft" in type:
         for obj in api_jsons:
             final_sentences.append(obj['name'])
-    else:
+    elif "amazon" in type:
         for obj in api_jsons:
             sentence = obj['name']['localizedStringLookupId']
             products = obj['productSubtypes']
             for pro in products:
                 sentence = sentence + " "
-                print("dfg", pro['name']['localizedStringLookupId'])
                 sentence = sentence + pro['name']['localizedStringLookupId']
             final_sentences.append(sentence)
+    elif "drawback" in type or "rodtep" in type:
+        for obj in api_jsons:
+            final_sentences.append(obj['description'])
 
 
     if(len(api_jsons)<=0):
@@ -100,21 +102,21 @@ def semantic_search(api_jsons, query2,type):
         
     max_similarity_index = match_gemini(query2, final_sentences)
 
-    if "one" in type:
-        if max_similarity_index>=0 and max_similarity_index<len(api_jsons):
-            return api_jsons[max_similarity_index]['Code']
-        try:
-            return api_jsons[random.randint(0, len(api_jsons)-1)]['Code']
-        except:
-            return "empty input"
-    else:
-        if max_similarity_index>=0 and max_similarity_index<len(api_jsons):
-            return api_jsons[max_similarity_index]
-        try:
-            return api_jsons[random.randint(0, len(api_jsons)-1)]['id']
-        except:
-            return "empty input"
-
+    # if "one" in type:
+    #     if max_similarity_index>=0 and max_similarity_index<len(api_jsons):
+    #         return api_jsons[max_similarity_index]['Code']
+    #     try:
+    #         return api_jsons[random.randint(0, len(api_jsons)-1)]['Code']
+    #     except:
+    #         return "empty input"
+    # else:
+    #     if max_similarity_index>=0 and max_similarity_index<len(api_jsons):
+    #         return api_jsons[max_similarity_index]
+    #     try:
+    #         return api_jsons[random.randint(0, len(api_jsons)-1)]['id']
+    #     except:
+    #         return "empty input"
+    return api_jsons[max_similarity_index]
 
 one = [
     {

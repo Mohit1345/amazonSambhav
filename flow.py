@@ -138,13 +138,13 @@ def submit_product():
             "import_country": import_country
         }
         final_json = process_data(product_name,import_country)
-        file_name = create_guide_document(product_name)
+        file_name,all_json = create_guide_document(product_name,final_json)
 
         return jsonify({
             "status": "success",
             "message": "Product information received and processed successfully.",
             "product_id": product_id,
-            "scheme_json":final_json,
+            "scheme_json":all_json,
             "data":file_name,
             "market_data":""
         }), 200

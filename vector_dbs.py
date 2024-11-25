@@ -45,7 +45,9 @@ def chunking(pdf_data,type=""):
         
     print("chunking")
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+    print("moving ")
     text_splitter = SemanticChunker(embeddings)
+    print("after semnatics")
     # print("pdf data is ", pdf_data)
     docs = text_splitter.create_documents([pdf_data])
     # print("chunks is , ",docs)
@@ -62,7 +64,7 @@ def save_vcdb(data, vector_db_name, metadata=None,is_table=False,type=""):
             combined_text = data.to_string(index=False)
         else:
             raise ValueError("For table data, provide a pandas DataFrame.")
-        docs = [{"page_content": combined_text, "metadata": metadata or {}}]
+        docs = [{"page_content": combined_text, "metadata": metadata}]
     else:
         print("Processing textual data...")
         docs = chunking(data,type)
@@ -105,4 +107,4 @@ def retrieve_from_vcdb(prompt, vector_db_name):
     retrieved_data = [{"content": doc.page_content, "metadata": doc.metadata} for doc in results]
     return retrieved_data
 
-# print(retrieve_from_vcdb("data","Drawback_db"))
+# print(retrieve_from_vcdb("compliance","Drawback_db"))

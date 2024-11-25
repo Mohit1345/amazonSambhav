@@ -10,7 +10,7 @@ sys.path.append('amazon-sambhav/macmap')
 from macmap import download_and_merge_files,get_country_code
 import os
 import json
-
+# from map_gemini import semantic_search
 
 def get_data_file(data_key,data_value,id_json,country):
         if data_key == "amazon":
@@ -55,17 +55,21 @@ def process_data(product_name, country):
     for data_key,data_value in mapping_dict.items():
         with open(data_value, "r", encoding="utf-8") as f:
             json_data = json.load(f)  # Parse JSON into a Python dictionary
-        
-        id_json = semantic_search(json_data,product_name,data_key)
-        print(f"for {data_key} in {data_value}")
-        print(id_json)
-        data_file = get_data_file(data_key,data_value,id_json,country)
 
-        no_reading = ['macmap','drawback','rodtep']
-        if  data_key not in no_reading:
-            pdf_data = read_data(data_file)
+        if data_key=="amazon":
+            with open("merged_data_meat.json", "r", encoding="utf-8") as f:
+                pdf_data = json.load(f)  # Parse JSON into a Python dictionary
         else:
-            pdf_data = data_file
+            id_json = semantic_search(json_data,product_name,data_key)
+            print(f"for {data_key} in {data_value}")
+            print(id_json)
+            data_file = get_data_file(data_key,data_value,id_json,country)
+
+            no_reading = ['macmap','drawback','rodtep']
+            if  data_key not in no_reading:
+                pdf_data = read_data(data_file)
+            else:
+                pdf_data = data_file
 
         only_prompt = ['drawback','rodtep']
         if data_key not in only_prompt:

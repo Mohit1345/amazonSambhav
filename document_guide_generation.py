@@ -321,7 +321,7 @@ Return the output in json format enclosed in ```json ```
     return json_info
 
 
-def create_guide_document(product_name):
+def create_guide_document(product_name,final_json):
     context_information_dict = get_export_compliance_context(product_name)
     compliance_category_mapping = {
     'Amazon Product Compliance': 'amazon_products_info',
@@ -342,14 +342,18 @@ def create_guide_document(product_name):
     
     for informative in informative_sections:
         key = compliance_category_mapping.get(informative)
-        context = context_information_dict.get(key, ["Context Not Available"])
+        context = context_information_dict.get(key, "Context Not Available")
+        if "Duty Drawbacks" in informative:  
+            context = context + " "+ "This data is related to Duty Drawback scheme: " +str(final_json['drawback'])
+        if "RodTep Benefits" in informative:
+            context = context + " "+ "This data is related to Rodtep scheme: " +str(final_json['rodtep'])
         all_sections.append(generate_informative_sections(informative, product_name, context))
 
     head_json = heading_information_generation(product_name, context_information_dict)
     print(all_sections)
     file_name = f"{product_name}_compliance_guide_documentation.pdf"
     create_pdf(file_name, head_json, all_sections)
-    return file_name
+    return file_name , all_sections
 
 
 create_guide_document("Notebooks")
