@@ -12,7 +12,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <Globe2 className="h-8 w-8 text-blue-600" />
-              <span className="text-xl font-bold text-gray-900">TradeComply</span>
+              <span className="text-xl font-bold text-gray-900">Trade Comply AI</span>
             </Link>
           </div>
           <div className="flex items-center space-x-4">
