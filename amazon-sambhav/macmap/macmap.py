@@ -18,7 +18,7 @@ def download_and_merge_files(reporter_id, product_id):
 
     # Build the URL dynamically based on parameters
     base_url = "https://www.macmap.org/en/query/results"
-    query_url = f"{base_url}?reporter={reporter_id}&partner=699&product={product_id}"
+    query_url = f"{base_url}?reporter={reporter_id}&partner=699&product={product_id}&level=6"
     print(query_url)
     driver.get(query_url)
 
@@ -37,6 +37,7 @@ def download_and_merge_files(reporter_id, product_id):
             for pattern, key in target_urls.items():
                 if pattern in url:
                     response_body = request.response.body.decode('utf-8', errors='ignore')
+                    print("response body , ",response_body)
                     try:
                         # Parse JSON response and add it to the merged data
                         print("response body ",response_body)
@@ -58,8 +59,8 @@ def download_and_merge_files(reporter_id, product_id):
     driver.quit()
 
 # Example usage
-# download_and_merge_files(reporter_id="842", product_id="010599")
-
+# download_and_merge_files(reporter_id="842", product_id="09101100")
+# 
 def get_country_code(country_name):
     with open('amazon-sambhav/macmap/countries.json', 'r') as file:
         countries_data = json.load(file)
@@ -68,3 +69,4 @@ def get_country_code(country_name):
         if country["Name"].lower() == country_name.lower():
             return country["Code"]
     return None  # Return None if country is not found
+

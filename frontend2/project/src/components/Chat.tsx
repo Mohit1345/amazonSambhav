@@ -25,7 +25,7 @@ export default function Chat() {
     
     setIsLoading(true);
     try {
-      const response = await fetch("https://example.com/api/chat", {
+      const response = await fetch(" http://127.0.0.1:5000/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,8 +33,8 @@ export default function Chat() {
         body: JSON.stringify({ message: userMessage, history: history }),
       });
       const data = await response.json();
-      print(data)
-      setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
+      console.log(data)
+      setMessages(prev => [...prev, { role: 'assistant', content: data.response  }]);
       setHistory(data.history);
     } catch (error) {
       setMessages(prev => [...prev, {

@@ -23,7 +23,7 @@ url_to_filename = {
     "https://www.macmap.org/api/results/taxes": "taxes.json",
 }
 
-downloads_dir = 'downloads'
+downloads_dir = 'sample'
 os.makedirs(downloads_dir, exist_ok=True)
 
 for request in driver.requests:

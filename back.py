@@ -26,10 +26,9 @@ def get_data_file(data_key,data_value,id_json,country):
 
             data_file = files[int(id_json['id'])]
         elif data_key == "macmap":
-            product_id = id_json['Code']
+            product_id = id_json['Code'] + "00"
             country_id = get_country_code(country)
-            data_json = download_and_merge_files(country_id,product_id)
-            return data_json
+            data_file = download_and_merge_files(country_id,product_id)
         elif data_key=="drawback" or data_key =="rodtep":
             return id_json
         else:
@@ -43,10 +42,11 @@ def process_data(product_name, country):
         "drawback":""
     }
     # product name mapping with ids of datas (amazon,macmap,dgf)
+        
     mapping_dict = {   
-        "amazon":"amazon-sambhav/amazon/productsList.json",
-        "dgft":"amazon-sambhav/dgft/extracted_data.json",     
-        "macmap":"amazon-sambhav/macmap/products.json",
+            "amazon":"amazon-sambhav/amazon/productsList.json",
+            "dgft":"amazon-sambhav/dgft/extracted_data.json",  
+            "macmap":"amazon-sambhav/macmap/products.json",
         "drawback":"amazon-sambhav/drawback/drawback.json",
         "rodtep":"amazon-sambhav/rodtep/rodtep.json"
     }
@@ -57,7 +57,7 @@ def process_data(product_name, country):
             json_data = json.load(f)  # Parse JSON into a Python dictionary
         
         id_json = semantic_search(json_data,product_name,data_key)
-
+        print(f"for {data_key} in {data_value}")
         print(id_json)
         data_file = get_data_file(data_key,data_value,id_json,country)
 
@@ -76,7 +76,7 @@ def process_data(product_name, country):
             else:
                 with_prompt['rodtep'] = pdf_data
     
-    return "universal",with_prompt
+    return with_prompt
     
 
 
@@ -105,3 +105,5 @@ def process_data(product_name, country):
 
 
 # process_data("glass","united states of america")
+
+

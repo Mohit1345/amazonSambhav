@@ -17,10 +17,11 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem
 
-from document_guide_generation import create_guide_document, upload_on_cloudinary
+from document_guide_generation import create_guide_document, upload_pdf_to_cloudinary
 
 from flask_cors import CORS
-
+import json
+import os
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}}) 
 # Sample storage for products and related data (in-memory for simplicity)
@@ -36,6 +37,7 @@ model = genai.GenerativeModel(
         "- Focus your response on the compliance requirements, regulations, and schemes relevant to the query and context provided.\n"
         "- Ensure your guidance is concise, professional, and easy to understand.\n"
         "- If the context lacks sufficient information, state what is missing and suggest additional details the user could provide."
+        "Don't include any markdown related notation or syntax such as * or / or any other just return pure string"
     )
 )
 
@@ -67,6 +69,22 @@ def chat_endpoint():
     data = request.json
     query = data.get("message", "")
     history = data.get("history", [])
+    # json_like_str = history.replace("'", '"')
+    
+    # Escape backslashes (to handle \n, \t, etc.)
+    # json_like_str = json_like_str.replace("\\", "\\\\")
+    
+    # Ensure JSON newlines are escaped correctly
+    # history = history.replace("\n", "\\n")
+    print(type(history))
+    print("history",history)
+    if history=="":
+        history = []
+    else:   
+        print("history in else ", type(history))
+        # history = json.loads(history)
+        pass
+    print(type(history))
 
     if not query:
         return jsonify({"error": "Message is required"}), 400
@@ -85,11 +103,11 @@ def chat_endpoint():
         if chunk.text:
             response_text += chunk.text
 
-    # Update the history with the new query and response
+   # Update the history with the new query and response
     history.append(f"User: {query}")
-    history.append(f"Bot: {response_text}")
+    history.append(f"Bot: {response_text}") 
 
-    return jsonify({"response": response_text, "history": str(history)})
+    return jsonify({"response": response_text, "history": history})
 
 
 
@@ -118,13 +136,15 @@ def submit_product():
             "import_country": import_country
         }
         final_json = process_data(product_name,import_country)
+        file_name = create_guide_document(product_name)
 
         return jsonify({
             "status": "success",
             "message": "Product information received and processed successfully.",
             "product_id": product_id,
-            "data": final_json['product_type'],
-            "doc_urls":final_json['urls']
+            "scheme_json":final_json,
+            "data":file_name,
+            "market_data":""
         }), 200
 
     except Exception as e:
@@ -138,28 +158,23 @@ def submit_product():
 @app.route('/generate-guide', methods=['POST'])
 def generate_guide():
     data = request.json
-    
+
     # Extract the product name from the request
     product_name = data.get("product_name")
-    
+
     if not product_name:
         return jsonify({"error": "Product name is required"}), 400
-    
+
     # Create the guide document
     try:
         file_name = create_guide_document(product_name)
+
+        # Return the file path instead of uploading to Cloudinary
+        file_path = os.path.abspath(file_name)
         
-        # Upload the file to Cloudinary
-        file_url = upload_on_cloudinary(file_name)
-        
-        # Optionally, you can delete the local file after uploading
-        if os.path.exists(file_name):
-            os.remove(file_name)
-        
-        return jsonify({"url": file_url})
+        return jsonify({"file_path": file_path})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -34,6 +34,10 @@ if "GOOGLE_API_KEY" not in os.environ:
     
 
 def chunking(pdf_data,type=""):
+    if not pdf_data or pdf_data == {}:  # Check if pdf_data is empty or None
+        print("No data provided to chunk.")
+        return []  # Return an empty list or handle as desired
+
     if "macmap" in type:
         splitter = RecursiveJsonSplitter(max_chunk_size=300)
         docs = splitter.create_documents(texts=[pdf_data])
@@ -61,7 +65,7 @@ def save_vcdb(data, vector_db_name, metadata=None,is_table=False,type=""):
         docs = [{"page_content": combined_text, "metadata": metadata or {}}]
     else:
         print("Processing textual data...")
-        docs = chunking(data)
+        docs = chunking(data,type)
 
     # Step 2: Initialize the embedding model (must match the chunker embedding)
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
@@ -101,4 +105,4 @@ def retrieve_from_vcdb(prompt, vector_db_name):
     retrieved_data = [{"content": doc.page_content, "metadata": doc.metadata} for doc in results]
     return retrieved_data
 
-# print(retrieve_from_vcdb("what is duty drawback","Drawback_db"))
+# print(retrieve_from_vcdb("data","Drawback_db"))

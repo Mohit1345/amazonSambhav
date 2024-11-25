@@ -271,7 +271,8 @@ export default function Home() {
       if (response.ok) {
         const responseData = await response.json();
         console.log("API Response:", responseData);
-        // navigate("/results", { state: responseData });
+        localStorage.setItem("amazon",JSON.stringify(responseData))
+        navigate("/results");
         alert("Data submitted successfully!");
       } else {
         console.error("API Error:", response.statusText);

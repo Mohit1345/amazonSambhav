@@ -3,13 +3,21 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, ListFlowable, ListItem
 import google.generativeai as genai
 
-genai.configure(api_key="AIzaSyC6SoO4TZWYmWvHa66f04osFHrEjsavjuY")
+genai.configure(api_key="AIzaSyDCpsHL1tTDviaaRAchmgSNcQ1SUaxLaeg")
+
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_chroma import Chroma
 import re
 import json
 import cloudinary
 import cloudinary.uploader
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+if "GOOGLE_API_KEY" not in os.environ:
+    os.environ["GOOGLE_API_KEY"] = os.environ.get("GEMINI_API_KEY2")
 
 def upload_pdf_to_cloudinary(file_path):
     # Configure Cloudinary
@@ -32,6 +40,7 @@ def upload_pdf_to_cloudinary(file_path):
         return None
 
 def get_context(prompt, vector_db_name="universal"):
+    genai.configure(api_key=os.environ.get("GEMINI_API_KEY2"))
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
     print("connecting vector db")
     try:
@@ -160,6 +169,10 @@ def extract_json(s):
 
 
 def generate_checkpoint_section(section_name, product_name, context):
+    if "GOOGLE_API_KEY" not in os.environ:
+        os.environ["GOOGLE_API_KEY"] = os.environ.get("GEMINI_API_KEY2")
+
+
     model = genai.GenerativeModel(
         model_name="gemini-1.5-flash",
         system_instruction = """
@@ -197,6 +210,8 @@ Return the output in json format enclosed in ```json ```
 
 
 def generate_informative_sections(section_name, product_name, context):
+    if "GOOGLE_API_KEY" not in os.environ:
+        os.environ["GOOGLE_API_KEY"] = os.environ.get("GEMINI_API_KEY2")
     model = genai.GenerativeModel(
         model_name="gemini-1.5-flash",
         system_instruction = """
@@ -229,6 +244,8 @@ Return the output in json format enclosed in ```json ```
     return extract_json(response.text)
 
 def heading_information_generation(product_name, context_information_dict):
+    if "GOOGLE_API_KEY" not in os.environ:
+        os.environ["GOOGLE_API_KEY"] = os.environ.get("GEMINI_API_KEY2")
     model = genai.GenerativeModel(
         model_name="gemini-1.5-flash",
         system_instruction = """
@@ -295,7 +312,7 @@ def create_guide_document(product_name):
     return file_name
 
 
-
+# create_guide_document("onion")
 # print(type(heading_information_generation("Mens T shirts", {})))
 
 # print(upload_pdf_to_cloudinary("C:\\Users\\hp\\Desktop\\Sambhav Hackathon\\Apparel- Adults_Men or Women Accessories (1).pdf"))
